@@ -1,0 +1,29 @@
+{
+	"name": "CV-CUDA Dev Container",
+	"dockerFile": "../docker/build22.04/Dockerfile",
+	"build": {
+		"args": {
+			"VER_CUDA": "12.6.3",
+			"VER_UBUNTU": "22.04",
+			"VER_NUMPY":"1.26.0"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cmake-tools",
+				"ms-python.python",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash",
+				"cmake.configureOnOpen": true
+			}
+		}
+	},
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/workspace",
+	"postCreateCommand": "python3 /workspace/cvcuda/print_compile_definitions.py",
+	"remoteUser": "root"
+}
